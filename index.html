@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registro</title>
+    <script>
+        // Função para carregar os usuários
+        function loadUsers() {
+            fetch('/users')
+                .then(response => response.json())
+                .then(users => {
+                    const table = document.getElementById('usersTable');
+                    users.forEach(user => {
+                        const row = table.insertRow();
+                        row.insertCell(0).textContent = user.pkUser;
+                        row.insertCell(1).textContent = user.login;
+                        row.insertCell(2).textContent = user.email;
+                        row.insertCell(3).textContent = user.created_at;
+                    });
+                });
+        }
+
+        // Função para lidar com o envio do formulário
+        function submitForm(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {
+                login: formData.get('login'),
+                email: formData.get('email'),
+                password: formData.get('senha')
+            };
+            fetch('/create_user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.message) {
+                        alert(result.message);
+                        // Recarregar os usuários após o registro
+                        loadUsers();
+                    }
+                });
+        }
+
+        // Carregar os usuários quando a página for carregada
+        window.onload = loadUsers;
+    </script>
+</head>
+
+<body>
+    <h1>CRUD teste</h1>
+    <h3>Registrar</h3>
+    <form onsubmit="submitForm(event)">
+        Login: <input type="text" name="login"><br>
+        Email: <input type="email" name="email"><br>
+        Senha: <input type="password" name="senha"><br>
+        <input type="submit" value="Registrar">
+    </form>
+    <h3>Exibir</h3>
+    <table id="usersTable" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Login</th>
+                <th>Email</th>
+                <th>Data de Criação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- As linhas serão preenchidas dinamicamente -->
+        </tbody>
+    </table>
+</body>
+
+</html>
