@@ -19,6 +19,7 @@ const dbConfig = {
 
 // Middleware para analisar corpos de solicitação JSON
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/web'));
 
 app.post('/create_user', async (req, res) => {
     try {

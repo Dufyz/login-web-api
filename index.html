@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
-    <title>Registro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <link rel="stylesheet" type="text/css" href="/public/assets/style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Oswald&display=swap" rel="stylesheet">
+
     <script>
         // Função para carregar os usuários
         function loadUsers() {
@@ -25,17 +34,17 @@
             event.preventDefault();
             const formData = new FormData(event.target);
             const data = {
-                login: formData.get('login'),
+                login: formData.get('name'),
                 email: formData.get('email'),
                 password: formData.get('senha')
             };
             fetch('/create_user', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
                 .then(response => response.json())
                 .then(result => {
                     if (result.message) {
@@ -52,14 +61,27 @@
 </head>
 
 <body>
-    <h1>CRUD teste</h1>
-    <h3>Registrar</h3>
-    <form onsubmit="submitForm(event)">
-        Login: <input type="text" name="login"><br>
-        Email: <input type="email" name="email"><br>
-        Senha: <input type="password" name="senha"><br>
-        <input type="submit" value="Registrar">
-    </form>
+    <div class="container" id="login-form">
+        <form class="input-box">
+            <h1>Login</h1>
+            <label>email</label> <input type="email" placeholder="email"><br>
+            <label>password <input type="password" placeholder="password"></label><br>
+            <input type="submit">
+            <p>Não possui conta? <a href="#" id="show-register-link">Registrar</a></p>
+        </form>
+    </div>
+
+    <div class="container" id="register-form">
+        <form class="input-box" onsubmit="submitForm(event)">
+            <h1>Registrar</h1>
+            <label>name<input type="text" placeholder="name" name="name"></label> <br>
+            <label>email <input type="email" placeholder="email" name="email"></label> <br>
+            <label>password <input type="password" placeholder="password" name="senha"></label> <br>
+            <input type="submit">
+            <p>Já possui uma conta? <a href="#" id="show-login-link">Login</a></p>
+        </form>
+    </div>
+
     <h3>Exibir</h3>
     <table id="usersTable" border="1">
         <thead>
@@ -74,6 +96,8 @@
             <!-- As linhas serão preenchidas dinamicamente -->
         </tbody>
     </table>
+
+    <script src="/public/assets/script.js"></script>
 </body>
 
 </html>
