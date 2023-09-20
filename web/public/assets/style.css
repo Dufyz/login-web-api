@@ -69,6 +69,6 @@ input::placeholder {
     font-weight: 600;
 }
 
-/* .section:nth-child(2) {
+.section:nth-child(2) {
     display: none;
-} */
+}
