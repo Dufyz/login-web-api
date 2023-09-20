@@ -1,0 +1,22 @@
+[
+    {
+        "login": "guilherme.thomaz",
+        "email": "guilherme.thomaz@email.com",
+        "password": 12345
+    },
+    {
+        "login": "isabella.mota",
+        "email": "isabella.mota@email.com",
+        "password": "mudar@123"
+    },
+    {
+        "login": "simone.schmidt",
+        "email": "simone.schmidt@email.com",
+        "password": 12345
+    },
+    {
+        "login": "leonardo.vaz",
+        "email": "leonardo.vaz@email.com",
+        "password": "macaxeira"
+    }
+]
