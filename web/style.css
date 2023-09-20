@@ -30,7 +30,6 @@ a {
     text-transform: capitalize;
     width: 500px;
     height: 500px;
-    /* background-color: red; */
 }
 
 .input-box h1 {
@@ -72,4 +71,8 @@ input::placeholder {
     text-transform: capitalize;
     padding: 10px;
     font-weight: 600;
+}
+
+.container:nth-child(2) {
+    display: none;
 }
