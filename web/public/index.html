@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
 
-    <link rel="stylesheet" type="text/css" href="/public/assets/style.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="/public/assets/style.css" /> -->
+    <link rel="stylesheet" type="text/css" href="assets/style.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +35,7 @@
             event.preventDefault();
             const formData = new FormData(event.target);
             const data = {
-                login: formData.get('name'),
+                login: formData.get('user'),
                 email: formData.get('email'),
                 password: formData.get('senha')
             };
@@ -61,28 +62,28 @@
 </head>
 
 <body>
-    <div class="container" id="login-form">
+    <section class="section" id="login-form">
+        <h1>Login</h1>
         <form class="input-box">
-            <h1>Login</h1>
             <label>email</label> <input type="email" placeholder="email"><br>
-            <label>password <input type="password" placeholder="password"></label><br>
+            <label>senha <input type="password" placeholder="password"></label><br>
             <input type="submit">
             <p>Não possui conta? <a href="#" id="show-register-link">Registrar</a></p>
         </form>
-    </div>
+    </section>
 
-    <div class="container" id="register-form">
+    <!-- <section class="section" id="register-form">
+        <h1>Registrar</h1>
         <form class="input-box" onsubmit="submitForm(event)">
-            <h1>Registrar</h1>
-            <label>name<input type="text" placeholder="name" name="name"></label> <br>
+            <label>user<input type="text" placeholder="user" name="user"></label> <br>
             <label>email <input type="email" placeholder="email" name="email"></label> <br>
-            <label>password <input type="password" placeholder="password" name="senha"></label> <br>
+            <label>senha <input type="password" placeholder="senha" name="senha"></label> <br>
             <input type="submit">
             <p>Já possui uma conta? <a href="#" id="show-login-link">Login</a></p>
         </form>
-    </div>
+    </section> -->
 
-    <h3>Exibir</h3>
+    <!-- <h3>Exibir</h3>
     <table id="usersTable" border="1">
         <thead>
             <tr>
@@ -93,11 +94,11 @@
             </tr>
         </thead>
         <tbody>
-            <!-- As linhas serão preenchidas dinamicamente -->
         </tbody>
-    </table>
+    </table> -->
 
-    <script src="/public/assets/script.js"></script>
+    <!-- <script src="/public/assets/script.js"></script> -->
+    <script src="assets/script.js"></script>
 </body>
 
 </html>
