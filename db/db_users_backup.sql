@@ -1,0 +1,13 @@
+CREATE DATABASE db_usuarios_bkp;
+ALTER DATABASE db_usuarios_bkp CHARACTER SET = utf8mb3;
+
+USE db_usuarios_bkp;
+
+CREATE TABLE Usuarios(
+    pkUser INT PRIMARY KEY AUTO_INCREMENT,
+    user_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    pwdHash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    modify_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);

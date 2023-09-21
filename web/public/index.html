@@ -62,26 +62,35 @@
 </head>
 
 <body>
-    <section class="section" id="login-form">
+    <form class="form-section" id="login-form">
         <h1>Login</h1>
-        <form class="input-box">
-            <label>email</label> <input type="email" placeholder="email"><br>
-            <label>senha <input type="password" placeholder="password"></label><br>
-            <input type="submit">
-            <p>Não possui conta? <a href="#" id="show-register-link">Registrar</a></p>
-        </form>
-    </section>
+        <div class="input-container">
+            <input type="email" placeholder="email"><br>
+        </div>
 
-    <section class="section" id="register-form">
+        <div class="input-container">
+            <input type="password" placeholder="password"><br>
+        </div>
+
+        <input type="submit">
+        <p>Não possui conta? <a href="#" id="show-register-link">Registrar</a></p>
+    </form>
+
+    <form class="form-section" id="register-form">
         <h1>Registrar</h1>
-        <form class="input-box" onsubmit="submitForm(event)">
-            <label>usuário<input type="text" placeholder="usuário" name="user"></label> <br>
-            <label>email <input type="email" placeholder="email" name="email"></label> <br>
-            <label>senha <input type="password" placeholder="senha" name="senha"></label> <br>
-            <input type="submit">
-            <p>Já possui uma conta? <a href="#" id="show-login-link">Login</a></p>
-        </form>
-    </section>
+        <div class="input-container">
+            <input type="text" placeholder="usuário" name="user"><br>
+        </div>
+        
+        <div class="input-container">
+            <input type="email" placeholder="email" name="email"><br>
+        </div>
+        <div class="input-container">
+            <input type="password" placeholder="senha" name="senha"><br>
+        </div>
+        <input type="submit">
+        <p>Já possui uma conta? <a href="#" id="show-login-link">Login</a></p>
+    </form>
 
     <!-- <h3>Exibir</h3>
     <table id="usersTable" border="1">
