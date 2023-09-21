@@ -14,7 +14,7 @@ const dbConfig = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'db_usuarios'
+    database: 'db_users'
 };
 
 // Middleware para analisar corpos de solicitação JSON
@@ -29,7 +29,7 @@ app.post('/create_user', async (req, res) => {
 
         const connection = await mysql.createConnection(dbConfig);
         await connection.execute(
-            'INSERT INTO Usuarios (login, email, pwdHash) VALUES (?, ?, ?)',
+            'INSERT INTO Usuarios (user_name, email, pwdHash) VALUES (?, ?, ?)',
             [login, email, hashedPassword]
         );
 
@@ -45,7 +45,7 @@ app.post('/create_user', async (req, res) => {
 app.get('/users', async (req, res) => {
     try {
         const connection = await mysql.createConnection(dbConfig);
-        const [users] = await connection.execute('SELECT pkUser, login, email, created_at FROM Usuarios');
+        const [users] = await connection.execute('SELECT pkUser, user_name, email, created_at FROM Usuarios');
         connection.end();
 
         res.status(200).send(users);
