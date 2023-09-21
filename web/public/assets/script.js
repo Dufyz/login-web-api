@@ -1,11 +1,20 @@
-// Ouvinte de evento para o link "Registrar"
-document.getElementById('show-register-link').addEventListener('click', function() {
-    document.getElementById('login-form').style.display = 'none'; // Oculta o formulário de login
-    document.getElementById('register-form').style.display = 'flex'; // Exibe o formulário de registro
-});
+function toggleSections() {
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    
+    const showRegisterLink = document.getElementById('show-register-link');
+    const showLoginLink = document.getElementById('show-login-link');
+    
+    showRegisterLink.addEventListener('click', () => {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+    });
+    
+    showLoginLink.addEventListener('click', () => {
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
+    });
+}
 
-// Ouvinte de evento para o link "Login" no formulário de registro
-document.getElementById('show-login-link').addEventListener('click', function() {
-    document.getElementById('register-form').style.display = 'none'; // Oculta o formulário de registro
-    document.getElementById('login-form').style.display = 'flex'; // Exibe o formulário de login
-});
+// Chame a função para habilitar o comportamento de alternância das seções
+toggleSections();
