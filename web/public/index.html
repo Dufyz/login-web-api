@@ -13,67 +13,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Oswald&display=swap" rel="stylesheet">
 
-    <script>
-        // Função para carregar os usuários
-        function loadUsers() {
-            fetch('/users')
-                .then(response => response.json())
-                .then(users => {
-                    const table = document.getElementById('usersTable');
-                    users.forEach(user => {
-                        const row = table.insertRow();
-                        row.insertCell(0).textContent = user.pkUser;
-                        row.insertCell(1).textContent = user.login;
-                        row.insertCell(2).textContent = user.email;
-                        row.insertCell(3).textContent = user.created_at;
-                    });
-                });
-        }
-
-        // Função para lidar com o envio do formulário
-        function submitForm(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const data = {
-                login: formData.get('user'),
-                email: formData.get('email'),
-                password: formData.get('senha')
-            };
-            fetch('/create_user', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-                .then(response => response.json())
-                .then(result => {
-                    if (result.message) {
-                        alert(result.message);
-                        // Recarregar os usuários após o registro
-                        loadUsers();
-                    }
-                });
-        }
-
-        // Carregar os usuários quando a página for carregada
-        window.onload = loadUsers;
-    </script>
 </head>
 
 <body>
-    <form class="form-section" id="login-form">
-        <h1>Login</h1>
-        <div class="input-container">
-            <input type="email" placeholder="email"><br>
+    <h2>Login</h2>
+    <form action="/authenticate_user" method="POST">
+        <div>
+            <label for="login">Login:</label>
+            <input type="text" id="login" name="login" required>
         </div>
-
-        <div class="input-container">
-            <input type="password" placeholder="password"><br>
+        <div>
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
         </div>
-
-        <input type="submit">
-        <p>Não possui conta? <a href="#" id="show-register-link">Registrar</a></p>
+        <button type="submit">Entrar</button>
     </form>
 
     <form class="form-section" id="register-form" onsubmit="submitForm(event)">
@@ -81,7 +34,7 @@
         <div class="input-container">
             <input type="text" placeholder="usuário" name="user"><br>
         </div>
-        
+
         <div class="input-container">
             <input type="email" placeholder="email" name="email"><br>
         </div>
@@ -92,7 +45,7 @@
         <p>Já possui uma conta? <a href="#" id="show-login-link">Login</a></p>
     </form>
 
-    <!-- <h3>Exibir</h3>
+    <h3>Exibir</h3>
     <table id="usersTable" border="1">
         <thead>
             <tr>
@@ -104,7 +57,7 @@
         </thead>
         <tbody>
         </tbody>
-    </table> -->
+    </table>
 
     <script src="/public/assets/js/script.js"></script>
     <!-- <script src="assets/js/script.js"></script> -->
