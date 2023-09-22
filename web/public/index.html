@@ -16,17 +16,18 @@
 </head>
 
 <body>
-    <h2>Login</h2>
-    <form action="/authenticate_user" method="POST">
-        <div>
-            <label for="login">Login:</label>
-            <input type="text" id="login" name="login" required>
+    <form action="/authenticate_user" method="POST" id="login-form" class="form-section">
+        <h1>Login</h1>
+        <div class="input-container">
+            <input type="email" placeholder="email" id="email" name="email" required><br>
         </div>
-        <div>
-            <label for="password">Senha:</label>
-            <input type="password" id="password" name="password" required>
+
+        <div class="input-container">
+            <input type="password" placeholder="password" id="password" name="password" required><br>
         </div>
-        <button type="submit">Entrar</button>
+
+        <input type="submit">
+        <p>Não possui conta? <a href="#" id="show-register-link">Registrar</a></p>
     </form>
 
     <form class="form-section" id="register-form" onsubmit="submitForm(event)">

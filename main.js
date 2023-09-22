@@ -21,7 +21,6 @@ const dbConfig = {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 app.use(express.static(__dirname + '/web'));
 
 app.post('/create_user', async (req, res) => {
@@ -68,12 +67,12 @@ app.get('/', (req, res) => {
 
 app.post('/authenticate_user', async (req, res) => {
     try {
-        const {login, password } = req.body;
+        const {email, password} = req.body;
 
         const connection = await mysql.createConnection(dbConfig);
 
-        // Consulta o banco de dados para obter a senha hash para o user_name fornecido
-        const [rows] = await connection.execute('SELECT pwdHash FROM Usuarios WHERE user_name = ?', [login]);
+        // Consulta o banco de dados para obter a senha hash para o email fornecido
+        const [rows] = await connection.execute('SELECT pwdHash FROM Usuarios WHERE email = ?', [email]);
 
         if (rows.length > 0) {
             const pwdHashFromDB = rows[0].pwdHash;
