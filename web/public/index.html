@@ -1,67 +1,55 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
 
-    <!-- <link rel="stylesheet" type="text/css" href="/public/assets/css/style.css" /> -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Oswald&display=swap" rel="stylesheet">
 
+
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 </head>
 
 <body>
-    <form action="/authenticate_user" method="POST" id="login-form" class="form-section">
-        <h1>Login</h1>
-        <div class="input-container">
-            <input type="email" placeholder="email" id="email" name="email" required><br>
-        </div>
+    <section class="">
+        <form action="/authenticated_user" method="post" id="login-form" class="form-container">
+            <h1>Login</h1>
+            <div class="input-container">
+                <label for="">Email</label></br>
+                <input type="text">
+            </div>
+            <div class="input-container">
+                <label for="">Senha</label></br>
+                <input type="text">
+            </div>
+            <button type="button">Login</button>
+            <p>Não possui conta?<a href=""> Registrar</a></p>
+        </form>
 
-        <div class="input-container">
-            <input type="password" placeholder="password" id="password" name="password" required><br>
-        </div>
+        <form action="/authenticated_user" method="post" id="login-form" class="form-container">
+            <h1>Registrar</h1>
+            <div class="input-container">
+                <label for="">Usuário</label></br>
+                <input type="text">
+            </div>
+            <div class="input-container">
+                <label for="">Email</label></br>
+                <input type="text">
+            </div>
+            <div class="input-container">
+                <label for="">Senha</label></br>
+                <input type="text">
+            </div>
+            <button type="button">Enviar</button>
+            <p>Já possui conta?<a href=""> Login</a></p>
+        </form>
+    </section>
 
-        <input type="submit">
-        <p>Não possui conta? <a href="#" id="show-register-link">Registrar</a></p>
-    </form>
-
-    <form class="form-section" id="register-form" onsubmit="submitForm(event)">
-        <h1>Registrar</h1>
-        <div class="input-container">
-            <input type="text" placeholder="usuário" name="user"><br>
-        </div>
-
-        <div class="input-container">
-            <input type="email" placeholder="email" name="email"><br>
-        </div>
-        <div class="input-container">
-            <input type="password" placeholder="senha" name="senha"><br>
-        </div>
-        <input type="submit">
-        <p>Já possui uma conta? <a href="#" id="show-login-link">Login</a></p>
-    </form>
-
-    <h3>Exibir</h3>
-    <table id="usersTable" border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Login</th>
-                <th>Email</th>
-                <th>Data de Criação</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-
-    <!-- <script src="/public/assets/js/script.js"></script> -->
-    <script src="assets/js/script.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/js/script.js" />
 </body>
 
 </html>

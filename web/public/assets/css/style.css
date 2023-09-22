@@ -1,122 +1,60 @@
 * {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     font-family: Arial, sans-serif;
     margin: 0px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
     background-color: #333;
     color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 a {
     text-decoration: none;
-    color: #0077cc;;
+    color: #0077cc;
 }
 
-.form-section {
-    width: 600px;
-    height: 600px;
-}
-
-.form-section h1 {
-    margin-bottom: 30px;
-    font-size: 2.5rem;
-}
-
-.input-container {
-    font-family: 'Kanit', sans-serif;
+.form-container {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
     width: 100%;
-    margin-bottom: 15px;
+    height: 100vh;
 }
 
-.input-container img {
-    padding: 10px;
-    background: dodgerblue;
-    max-width: 30px;
-    text-align: center;
+.form-container h1 {
+    margin-bottom: 30px;
 }
 
-.input-container input {
-    font-size: 18px;
+.form-container input {
+    width: 400px;
+    height: 30px;
+    margin-top: 10px;
+    padding: 5px , 5px;
 }
 
-.input-container label {
-    font-size: 1.5rem;
-}
-
-.form-section p {
-    margin-top: 40px;
-    font-size: 18px;
-    text-transform: uppercase;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 15px 0px 15px 0px;
-}
-
-input[type="submit"] {
+.form-container button {
+    width: 100px;
+    height: 25px;
+    border: none;
     background-color: #0077cc;
     color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    width: 110px;
-    height: 40px;
-    text-align: center;
     margin-top: 10px;
 }
 
-input::placeholder {
-    text-transform: uppercase;
-    font-weight: 600;
-    padding: 10px;
+.form-container p {
+    margin-top: 25px;
 }
 
-.form-section:nth-child(2) {
-    display: none;
-}
-
-.info-container {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    /* justify-content: end; */
-    align-items: center;
+.input-container {
     margin-bottom: 10px;
-    background-color: #fff;
-    color: black;
 }
 
-.info-container img {
-    padding: 10px;
-    background: dodgerblue;
-    max-width: 30px;
-    text-align: center;
-    cursor: pointer;
-}
-
-.input-container-endereco {
-    display: flex;
-    flex-direction: column;
-}
-
-.input-container-endereco-uf {
-    display: flex;
-    flex-direction: row;
-}
-
-.ml{
-    margin: 10px;
-}
+/* .form-container:nth-child(2) {
+    display: none;
+} */

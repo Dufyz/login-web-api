@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Usuário</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/teste.css" />
+</head>
+
+<body>
+
+<section class="profile-section">
+    <header>
+        <h1>Perfil</h1>
+    </header>
+
+    <form id="profile-form" action="update_profile.php" method="post">
+        <div class="form-group">
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" name="username" value="USUARIO" readonly>
+            <button type="button" class="edit-button" onclick="enableEditing('username')">Editar</button>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="EMAIL" readonly>
+            <button type="button" class="edit-button" onclick="enableEditing('email')">Editar</button>
+        </div>
+
+        <div class="form-group address-group">
+            <label>Endereço:</label>
+            <div class="address-fields">
+                <div class="field">
+                    <input type="text" id="state" name="state" value="ESTADO" readonly>
+                    <button type="button" class="edit-button" onclick="enableEditing('state')">Editar</button>
+                </div>
+                <div class="field">
+                    <input type="text" id="city" name="city" value="CIDADE" readonly>
+                    <button type="button" class="edit-button" onclick="enableEditing('city')">Editar</button>
+                </div>
+            </div>
+            <div class="address-fields">
+                <div class="field">
+                    <input type="text" id="street" name="street" value="RUA" readonly>
+                    <button type="button" class="edit-button" onclick="enableEditing('street')">Editar</button>
+                </div>
+                <div class="field">
+                    <input type="text" id="zip" name="zip" value="CEP" readonly>
+                    <button type="button" class="edit-button" onclick="enableEditing('zip')">Editar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" value="SENHA_SECRETA" readonly>
+            <button type="button" class="edit-button" onclick="enableEditing('password')">Editar</button>
+        </div>
+
+        <button type="submit" class="submit-button">Atualizar Perfil</button>
+    </form>
+
+    <script type="text/javascript">
+        function enableEditing(fieldId) {
+            var field = document.getElementById(fieldId);
+            field.readOnly = !field.readOnly;
+            if (!field.readOnly) {
+                field.focus();
+            }
+        }
+    </script>
+
+</section>
+
+</body>
+</html>
