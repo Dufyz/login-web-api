@@ -106,3 +106,17 @@ input::placeholder {
     text-align: center;
     cursor: pointer;
 }
+
+.input-container-endereco {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container-endereco-uf {
+    display: flex;
+    flex-direction: row;
+}
+
+.ml{
+    margin: 10px;
+}
