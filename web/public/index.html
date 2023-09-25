@@ -5,51 +5,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="public/assets/css/style.css" /> -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Oswald&display=swap" rel="stylesheet">
 
 
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 </head>
 
 <body>
     <section class="">
-        <form action="/authenticated_user" method="post" id="login-form" class="form-container">
+        <form action="/authenticate_user" method="POST" id="login-form" class="form-container">
             <h1>Login</h1>
             <div class="input-container">
                 <label for="">Email</label></br>
-                <input type="text">
+                <input type="text" type="email" id="email" name="email" required>
             </div>
             <div class="input-container">
                 <label for="">Senha</label></br>
-                <input type="text">
+                <input type="password" id="password" name="password" required>
             </div>
-            <button type="button">Login</button>
-            <p>Não possui conta?<a href=""> Registrar</a></p>
+            <button type="submit">Login</button>
+            <p>Não possui conta? <a href="#" id="show-register-link">Registrar</a></p>
         </form>
 
-        <form action="/authenticated_user" method="post" id="login-form" class="form-container">
+        <form id="register-form" class="form-container" onsubmit="submitForm(event)">
             <h1>Registrar</h1>
             <div class="input-container">
                 <label for="">Usuário</label></br>
-                <input type="text">
+                <input type="text" name="user">
             </div>
             <div class="input-container">
                 <label for="">Email</label></br>
-                <input type="text">
+                <input type="email" name="email">
             </div>
             <div class="input-container">
                 <label for="">Senha</label></br>
-                <input type="text">
+                <input type="password" name="senha">
             </div>
-            <button type="button">Enviar</button>
-            <p>Já possui conta?<a href=""> Login</a></p>
+            <button type="submit">Enviar</button>
+            <p>Já possui uma conta? <a href="#" id="show-login-link">Login</a></p>
         </form>
     </section>
 
-    <link rel="stylesheet" type="text/css" href="assets/js/script.js" />
+    <script src="assets/js/script.js"></script>
+    <!-- <script src="public/assets/js/script.js"></script> -->
+
 </body>
 
 </html>

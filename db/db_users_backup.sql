@@ -12,14 +12,14 @@ CREATE TABLE Usuarios(
     modify_at DATETIME ON UPDATE CURRENT_TIMESTAMP
 );
 
--- CREATE TABLE Endereco(
---     pkEndereco INT PRIMARY KEY AUTO_INCREMENT,
---     estado VARCHAR(2) NOT NULL,
---     cidade VARCHAR(255) NOT NULL,
---     rua VARCHAR(255) NOT NULL,
---     cep VARCHAR(8) NOT NULL,
---     fkUser INT NOT NULL UNIQUE
--- );
+CREATE TABLE Endereco(
+    pkEndereco INT PRIMARY KEY AUTO_INCREMENT,
+    estado VARCHAR(2) NOT NULL,
+    cidade VARCHAR(255) NOT NULL,
+    rua VARCHAR(255) NOT NULL,
+    cep VARCHAR(8) NOT NULL,
+    fkUser INT NOT NULL UNIQUE
+);
 
--- ALTER TABLE Endereco 
--- ADD CONSTRAINT fk_Usuarios_Endereco FOREIGN KEY(fkUser) REFERENCES Usuarios(pkUser);
+ALTER TABLE Endereco 
+ADD CONSTRAINT fk_Usuarios_Endereco FOREIGN KEY(fkUser) REFERENCES Usuarios(pkUser);

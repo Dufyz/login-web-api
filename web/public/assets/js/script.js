@@ -7,14 +7,15 @@ function toggleSections() {
 
     showRegisterLink.addEventListener('click', () => {
         loginForm.style.display = 'none';
-        registerForm.style.display = 'block';
+        registerForm.style.display = 'flex';
     });
 
     showLoginLink.addEventListener('click', () => {
-        loginForm.style.display = 'block';
+        loginForm.style.display = 'flex';
         registerForm.style.display = 'none';
     });
 }
+
 
 // Chame a função para habilitar o comportamento de alternância das seções
 toggleSections();

@@ -5,53 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-
 </head>
 
 <body>
-    <div class="form-section">
-        <h1>Perfil</h1>
-        <h3>Usuário</h3>
-        <div class="input-container">
-            <input type="email" readonly value="USUARIO"><br>
-            <img src="./assets/img/botao-editar.png" alt="" srcset="">
-        </div>
-        <h3>Email</h3>
-        <div class="input-container">
-            <input type="email" readonly value="EMAIL"><br>
-            <img src="./assets/img/botao-editar.png" alt="" srcset="">
-        </div>
-        <h3>Endereco</h3>
-        <div class="input-container-endereco">
-            <div class="input-container-endereco-uf">
-                <div class="input-container">
-                    <input type="text" readonly value="ESTADO"><br>
-                    <img src="./assets/img/botao-editar.png" alt="" srcset="">
-                </div>
-                <div class="ml"></div>
-                <div class="input-container">
-                    <input type="text" readonly value="CIDADE"><br>
-                    <img src="./assets/img/botao-editar.png" alt="" srcset="">
-                </div>
+
+    <section class="form-container">
+    <h1>Perfil</h1>
+        <div class="data-container">
+            <div class="data-container-input">
+                <label for="">Usuario</label>
+                <input type="text" value="guilherme.thomaz">
             </div>
-            <div class="input-container">
-                <input type="text" readonly value="RUA"><br>
-                <img src="./assets/img/botao-editar.png" alt="" srcset="">
+            <div class="data-container-input">
+                <label for="">Email</label>
+                <input type="text" value="guilherme.thomaz@email.com">
             </div>
-            <div class="input-container">
-                <input type="text" readonly value="CEP"><br>
-                <img src="./assets/img/botao-editar.png" alt="" srcset="">
+            <div class="data-container-input">
+                <label for="">Telefone</label>
+                <input type="text" value="(62) 9 98698465">
             </div>
+            <div class="data-container-input">
+                <label for="">Senha</label>
+                <input type="password" value="senha_secreta">
+            </div>
+            <div class="data-container-input">
+                <h2>Endereço</h2>
+                <label for="">Estado</label>
+                <input type="text">
+                <label for="">Cidade</label>
+                <input type="text">
+                <label for="">Bairro</label>
+                <input type="text">
+                <label for="">Rua</label>
+                <input type="text">
+
+            </div>
+            <button type="submit">Editar</button>
         </div>
-        <h3>Senha</h3>
-        <div class="input-container">
-            <input type="password" readonly value="SENHA_SECRETA"><br>
-            <img src="./assets/img/botao-editar.png" alt="" srcset="">
-        </div>
-        <input type="submit" value="Enviar">
-    </div>
+    </section>
 </body>
 
 </html>

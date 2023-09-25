@@ -13,14 +13,14 @@ CREATE TABLE Usuarios(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- CREATE TABLE Endereco(
---     pkEndereco_log INT PRIMARY KEY AUTO_INCREMENT,
---     pkEndereco INT NOT NULL,
---     estado VARCHAR(2) NOT NULL,
---     cidade VARCHAR(255) NOT NULL,
---     rua VARCHAR(255) NOT NULL,
---     cep VARCHAR(8) NOT NULL,
---     fkUser INT NOT NULL,
---     ALT ENUM('I', 'U', 'D') NOT NULL,
---     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
--- );
+CREATE TABLE Endereco(
+    pkEndereco_log INT PRIMARY KEY AUTO_INCREMENT,
+    pkEndereco INT NOT NULL,
+    estado VARCHAR(2) NOT NULL,
+    cidade VARCHAR(255) NOT NULL,
+    numero INT NOT NULL,
+    cep VARCHAR(8) NOT NULL,
+    fkUser INT NOT NULL,
+    ALT ENUM('I', 'U', 'D') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
