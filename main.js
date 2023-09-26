@@ -81,7 +81,8 @@ app.post('/authenticate_user', async (req, res) => {
             const passwordIsValid = bcrypt.compareSync(password, pwdHashFromDB);
 
             if (passwordIsValid) {
-                res.status(200).send("Usuário autenticado com sucesso!");
+                // res.status(200).send("Usuário autenticado com sucesso!");
+                res.redirect('/');
             } else {
                 res.status(401).send("Senha incorreta!");
             }
