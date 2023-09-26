@@ -23,3 +23,12 @@ CREATE TABLE Endereco(
 
 ALTER TABLE Endereco 
 ADD CONSTRAINT fk_Usuarios_Endereco FOREIGN KEY(fkUser) REFERENCES Usuarios(pkUser);
+
+CREATE TABLE Telefone(
+    pkTelefone INT PRIMARY KEY AUTO_INCREMENT,
+    numero VARCHAR(255) NOT NULL,
+    fkUser INT NOT NULL UNIQUE
+);
+
+ALTER TABLE Telefone
+ADD CONSTRAINT fk_Usuarios_Telefone FOREIGN KEY(fkUser) REFERENCES Usuarios(pkUser);

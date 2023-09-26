@@ -24,3 +24,12 @@ CREATE TABLE Endereco(
     ALT ENUM('I', 'U', 'D') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE Telefone(
+    pkTelefone_log INT PRIMARY KEY AUTO_INCREMENT,
+    pkTelefone INT NOT NULL,
+    numero VARCHAR(255) NOT NULL,
+    fkUser INT NOT NULL,
+    ALT ENUM('I', 'U', 'D') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

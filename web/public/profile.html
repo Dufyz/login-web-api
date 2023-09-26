@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/style.css" /> -->
+    <link rel="stylesheet" type="text/css" href="public/assets/css/style.css" />
 </head>
 
 <body>
-
     <section>
         <div class="form-container">
             <div class="data-container-input">
@@ -19,19 +19,19 @@
                 <div class="data-container-personal-info">
                     <div class="data-container-input">
                         <label for="">Usuario</label>
-                        <input type="text" value="guilherme.thomaz">
+                        <input type="text" id="user_name" value="">
                     </div>
-                    <div class="data-container-input">
+                    <div class="data-container-input" id='email'>
                         <label for="">Email</label>
-                        <input type="text" value="guilherme.thomaz@email.com">
+                        <input type="text" id="email" value="">
                     </div>
                     <div class="data-container-input">
                         <label for="">Telefone</label>
-                        <input type="text" value="(62) 9 9999-9999">
+                        <input type="text" id="telefone" value="">
                     </div>
                     <div class="data-container-input">
                         <label for="">Senha</label>
-                        <input type="password" value="senha_secreta">
+                        <input type="password" id="password" value="">
                     </div>
                 </div>
                 <div class="data-container-endereco">
@@ -56,6 +56,9 @@
             <button type="submit">Editar</button>
         </div>
     </section>
+
+    <!-- <script src="assets/js/script.js"></script> -->
+    <script src="public/assets/js/script.js"></script>
 </body>
 
 </html>

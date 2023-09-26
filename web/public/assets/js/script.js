@@ -64,3 +64,23 @@ function submitForm(event) {
 
 // Carregar os usuários quando a página for carregada
 window.onload = loadUsers;
+
+// Função para buscar dados do usuário
+async function fetchUserData() {
+    try {
+      const response = await fetch('/user_data');
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      const data = await response.json();
+      // Atualizando os elementos de entrada com os dados recebidos
+      document.getElementById('user_name').value = data.user_name;
+      document.getElementById('email').value = data.email;
+      // ... atualize outros campos conforme necessário
+    } catch (error) {
+      console.error('There has been a problem with your fetch operation:', error);
+    }
+  }
+  
+  // Chame a função quando a página terminar de carregar
+  window.onload = fetchUserData;

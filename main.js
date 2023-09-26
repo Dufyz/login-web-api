@@ -2,9 +2,11 @@
 
 const path = require('path');
 const express = require('express');
+const session = require('express-session');
 const mysql = require('mysql2/promise');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 
 const app = express();
 const port = 3000;
@@ -17,9 +19,15 @@ const dbConfig = {
     database: 'db_users'
 };
 
+const secret = crypto.randomBytes(32).toString('hex');
 // Middleware para analisar corpos de solicitação JSON
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+    secret: secret,
+    resave: false,
+    saveUninitialized: true
+}));
 
 app.use(express.static(__dirname + '/web'));
 
@@ -65,6 +73,18 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'web/public/index.html'));
 });
 
+function checkAuthentication(req, res, next) {
+    if(req.session.isAuthenticated) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+}
+
+app.get('/profile', checkAuthentication, (req, res) => {
+    res.sendFile(path.join(__dirname, 'web/public/profile.html'));
+});
+
 app.post('/authenticate_user', async (req, res) => {
     try {
         const {email, password} = req.body;
@@ -81,8 +101,8 @@ app.post('/authenticate_user', async (req, res) => {
             const passwordIsValid = bcrypt.compareSync(password, pwdHashFromDB);
 
             if (passwordIsValid) {
-                // res.status(200).send("Usuário autenticado com sucesso!");
-                res.redirect('/');
+                req.session.isAuthenticated = true;
+                res.redirect('/profile');
             } else {
                 res.status(401).send("Senha incorreta!");
             }
@@ -97,3 +117,15 @@ app.post('/authenticate_user', async (req, res) => {
     }
     
 });
+
+app.get('/user_data', checkAuthentication, async(req, res) => {
+    try {
+        const connection = await mysql.createConnection(dbConfig);
+        const user = await connection.execute('SELECT user_name, email FROM Usuarios WHERE email = ?', ['guilherme@email.com']);
+        connection.end();
+        res.status(200).send(user[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({message: "Inernal Server error"});
+    };
+})
