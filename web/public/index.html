@@ -50,21 +50,8 @@
         </form>
     </section>
 
-    <script>
-        async function fetchUserData() {
-            try {
-                const responde = await fetch('/user_data');
-                const user = await response.json();
-                document.getElementById('user_name').value = user.user_name;
-            } catch (error) {
-                console.error(error);
-            }
-        }
-
-        window.onload = fetchUserData;
-    </script>
-    <!-- <script src="assets/js/script.js"></script> -->
-    <script src="public/assets/js/script.js"></script>
+    <!-- <script src="assets/js/index.js"></script> -->
+    <script src="public/assets/js/index.js"></script>
 
 </body>
 

@@ -1,8 +1,8 @@
 // http://localgost:3000/create_user
 
-const path = require('path');
 const express = require('express');
 const session = require('express-session');
+const path = require('path');
 const mysql = require('mysql2/promise');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
@@ -20,6 +20,15 @@ const dbConfig = {
 };
 
 const secret = crypto.randomBytes(32).toString('hex');
+
+function checkAuthentication(req, res, next) {
+    if (req.session.isAuthenticated) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+}
+
 // Middleware para analisar corpos de solicitação JSON
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,6 +39,14 @@ app.use(session({
 }));
 
 app.use(express.static(__dirname + '/web'));
+
+app.listen(port, () => {
+    console.log(`Server started on http://localhost:${port}`);
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'web/public/index.html'));
+});
 
 app.post('/create_user', async (req, res) => {
     try {
@@ -65,29 +82,27 @@ app.get('/users', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server started on http://localhost:${port}`);
-});
+app.get('/user_data', checkAuthentication, async (req, res) => {
+    try {
+        const email = req.session.email;
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'web/public/index.html'));
-});
+        const connection = await mysql.createConnection(dbConfig);
+        // const pkUserSQL = await connection.execute('SELECT pkUser FROM Usuarios WHERE email = ?' [email]);
+        // const pkUser = pkUserSQL[0][0].pkUser;
 
-function checkAuthentication(req, res, next) {
-    if(req.session.isAuthenticated) {
-        next();
-    } else {
-        res.redirect('/');
-    }
-}
+        const user = await connection.execute('SELECT User.user_name, User.email, User.pwdHash, Tel.numero as telnumero, Ed.estado, Ed.cidade, Ed.cep, Ed.numero as ednumero FROM Usuarios as User INNER JOIN Telefone as Tel ON Tel.fkUser = User.pkUser INNER JOIN Endereco as Ed ON Ed.fkUser = User.pkUser WHERE pkUser = ?', [1]);
 
-app.get('/profile', checkAuthentication, (req, res) => {
-    res.sendFile(path.join(__dirname, 'web/public/profile.html'));
-});
+        connection.end();
+        res.status(200).send(user[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "Inernal Server error" });
+    };
+})
 
 app.post('/authenticate_user', async (req, res) => {
     try {
-        const {email, password} = req.body;
+        const { email, password } = req.body;
 
         const connection = await mysql.createConnection(dbConfig);
 
@@ -102,6 +117,7 @@ app.post('/authenticate_user', async (req, res) => {
 
             if (passwordIsValid) {
                 req.session.isAuthenticated = true;
+                req.session.email = email;
                 res.redirect('/profile');
             } else {
                 res.status(401).send("Senha incorreta!");
@@ -115,17 +131,9 @@ app.post('/authenticate_user', async (req, res) => {
         console.error("Erro detalhado:", error);  // Log do erro detalhado
         res.status(500).send("Erro ao autenticar o usuário!");
     }
-    
+
 });
 
-app.get('/user_data', checkAuthentication, async(req, res) => {
-    try {
-        const connection = await mysql.createConnection(dbConfig);
-        const user = await connection.execute('SELECT user_name, email FROM Usuarios WHERE email = ?', ['guilherme@email.com']);
-        connection.end();
-        res.status(200).send(user[0]);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({message: "Inernal Server error"});
-    };
-})
+app.get('/profile', checkAuthentication, (req, res) => {
+    res.sendFile(path.join(__dirname, 'web/public/profile.html'));
+});
