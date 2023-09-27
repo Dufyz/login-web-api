@@ -82,24 +82,6 @@ app.get('/users', async (req, res) => {
     }
 });
 
-app.get('/user_data', checkAuthentication, async (req, res) => {
-    try {
-        const email = req.session.email;
-
-        const connection = await mysql.createConnection(dbConfig);
-        // const pkUserSQL = await connection.execute('SELECT pkUser FROM Usuarios WHERE email = ?' [email]);
-        // const pkUser = pkUserSQL[0][0].pkUser;
-
-        const user = await connection.execute('SELECT User.user_name, User.email, User.pwdHash, Tel.numero as telnumero, Ed.estado, Ed.cidade, Ed.cep, Ed.numero as ednumero FROM Usuarios as User INNER JOIN Telefone as Tel ON Tel.fkUser = User.pkUser INNER JOIN Endereco as Ed ON Ed.fkUser = User.pkUser WHERE pkUser = ?', [1]);
-
-        connection.end();
-        res.status(200).send(user[0]);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({ message: "Inernal Server error" });
-    };
-})
-
 app.post('/authenticate_user', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -133,6 +115,24 @@ app.post('/authenticate_user', async (req, res) => {
     }
 
 });
+
+app.get('/user_data', checkAuthentication, async (req, res) => {
+    try {
+        const email = req.session.email;
+
+        const connection = await mysql.createConnection(dbConfig);
+        const pkUserSQL = await connection.execute('SELECT pkUser FROM Usuarios WHERE email = ?', [email]);
+        const pkUser = pkUserSQL[0][0].pkUser;
+
+        const user = await connection.execute('SELECT User.user_name, User.email, User.pwdHash, Tel.numero as telefone, Ed.estado, Ed.cidade, Ed.cep, Ed.numero FROM Usuarios as User INNER JOIN Telefone as Tel ON Tel.fkUser = User.pkUser INNER JOIN Endereco as Ed ON Ed.fkUser = User.pkUser WHERE pkUser = ?', [pkUser]);
+
+        connection.end();
+        res.status(200).send(user[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "Inernal Server error" });
+    };
+})
 
 app.get('/profile', checkAuthentication, (req, res) => {
     res.sendFile(path.join(__dirname, 'web/public/profile.html'));
