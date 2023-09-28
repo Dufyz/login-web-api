@@ -124,10 +124,35 @@ app.get('/user_data', checkAuthentication, async (req, res) => {
         const pkUserSQL = await connection.execute('SELECT pkUser FROM Usuarios WHERE email = ?', [email]);
         const pkUser = pkUserSQL[0][0].pkUser;
 
-        const user = await connection.execute('SELECT User.user_name, User.email, User.pwdHash, Tel.numero as telefone, Ed.estado, Ed.cidade, Ed.cep, Ed.numero FROM Usuarios as User INNER JOIN Telefone as Tel ON Tel.fkUser = User.pkUser INNER JOIN Endereco as Ed ON Ed.fkUser = User.pkUser WHERE pkUser = ?', [pkUser]);
+        user = {
+            user_name: "1",
+            email: "2",
+            telefone: "3",
+            // pwdHash: "",
+            estado: "4",
+            cidade: "5",
+            cep: "6",
+            numero: "7"
+        }
+
+        sql = await connection.execute('SELECT user_name, email FROM Usuarios WHERE pkUser = ?', [pkUser]);
+        user.user_name = sql[0][0].user_name;
+        user.email = sql[0][0].email;
+
+        sql = await connection.execute('SELECT numero FROM Telefone WHERE fkUser = ?', [pkUser]);
+
+        if (sql[0][0]?.numero) {
+            user.telefone = sql[0][0].numero;
+        } 
+
+        // sql = await connection.execute('SELECT estado, cidade, cep, numero FROM Endereco WHERE fkUser = ?', [pkUser]);
+        // user.estado = sql[0][0].estado;
+        // user.cidade = sql[0][0].cidade;
+        // user.cep = sql[0][0].cep;
+        // user.numero = sql[0][0].numero;
 
         connection.end();
-        res.status(200).send(user[0]);
+        res.status(200).send(user);
     } catch (error) {
         console.error(error);
         res.status(500).send({ message: "Inernal Server error" });
