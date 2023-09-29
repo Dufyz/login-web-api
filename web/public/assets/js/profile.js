@@ -48,32 +48,37 @@ function updateUser(user) {
     },
     body: JSON.stringify(user),
   })
-  .then(response => response.json())
-  .then(data => {
-    console.log("Dados atualizados:", data);
-  })
-  .catch(error => {
-    console.error('Erro ao atualizar:', error);
-  });
+    .then(response => response.json())
+    .then(data => {
+      console.log("Dados atualizados:", data);
+    })
+    .catch(error => {
+      console.error('Erro ao atualizar:', error);
+    });
 };
 
 document.getElementById('editar').addEventListener('click', function (event) {
   if (this.innerText == "Editar") {
     this.innerText = 'Salvar';
     document.getElementById('telefone').removeAttribute('readonly');
-    // document.getElementById('password').removeAttribute('readonly');
     document.getElementById('estado').removeAttribute('readonly');
     document.getElementById('cidade').removeAttribute('readonly');
     document.getElementById('cep').removeAttribute('readonly');
     document.getElementById('numero').removeAttribute('readonly');
+
+    document.getElementById('excluir').style.visibility = "visible";
+    document.getElementById('logout').style.visibility = "hidden";
+
   } else {
     this.innerText = 'Editar';
     document.getElementById('telefone').setAttribute('readonly', 'readonly');
-    // document.getElementById('password').setAttribute('readonly', 'readonly');
     document.getElementById('estado').setAttribute('readonly', 'readonly');
     document.getElementById('cidade').setAttribute('readonly', 'readonly');
     document.getElementById('cep').setAttribute('readonly', 'readonly');
     document.getElementById('numero').setAttribute('readonly', 'readonly');
+
+    document.getElementById('excluir').style.visibility = "hidden";
+    document.getElementById('logout').style.visibility = "visible";
 
     user = {
       telefone: document.getElementById('telefone').value,
@@ -86,3 +91,21 @@ document.getElementById('editar').addEventListener('click', function (event) {
     updateUser(user);
   }
 });
+
+document.getElementById('excluir').addEventListener('click', function (event) {
+  fetch('/delete_user', {
+    method: 'DELETE',
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        window.location.href = '/';
+      } else {
+        console.error('Erro ao excluir usuário:', data.message);
+      }
+    })
+    .catch(error => {
+      console.error('Erro ao excluir usuário:', error);
+    });
+});
+

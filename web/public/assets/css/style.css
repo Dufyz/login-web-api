@@ -82,12 +82,25 @@ input {
     margin-bottom: 15px;
 }
 
-.data-container-button{
+.data-container-button-column{
     width: 100%;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: space-between;
 }
+
+.data-container-button-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#excluir {
+    visibility: hidden;
+    background-color: red;
+}
+
 
 button {
     width: 100px;

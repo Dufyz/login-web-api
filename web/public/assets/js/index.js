@@ -16,25 +16,8 @@ function toggleSections() {
     });
 }
 
-
 // Chame a função para habilitar o comportamento de alternância das seções
 toggleSections();
-
-// Função para carregar os usuários
-function loadUsers() {
-    fetch('/users')
-        .then(response => response.json())
-        .then(users => {
-            const table = document.getElementById('usersTable');
-            users.forEach(user => {
-                const row = table.insertRow();
-                row.insertCell(0).textContent = user.pkUser;
-                row.insertCell(1).textContent = user.login;
-                row.insertCell(2).textContent = user.email;
-                row.insertCell(3).textContent = user.created_at;
-            });
-        });
-}
 
 // Função para lidar com o envio do formulário
 function submitForm(event) {
@@ -56,12 +39,9 @@ function submitForm(event) {
         .then(result => {
             if (result.message) {
                 alert(result.message);
-                // Recarregar os usuários após o registro
-                loadUsers();
+            };
+            if (result.success) {
+                window.location.href = '/';
             }
         });
-}
-
-// Carregar os usuários quando a página for carregada
-window.onload = loadUsers;
-
+};

@@ -124,10 +124,10 @@ app.post('/create_user', async (req, res) => {
 
         connection.end();
 
-        res.status(201).send({ message: 'New user created!' });
+        res.status(201).send({ message: 'New user created!', success: true});
     } catch (error) {
         console.error(error);
-        res.status(500).send({ message: 'Internal server error' });
+        res.status(500).send({ message: 'Internal server error', success: false });
     }
 });
 
@@ -176,7 +176,7 @@ app.post('/logout', async (req, res) => {
 
 app.put('/update_user', async (req, res) => {
     try {
-        const { telefone, estado, cidade, cep, numero } = req.body;
+        const { telefone, estado, cidade, cep, numero    } = req.body;
         const email = req.session.email;
         const connection = await mysql.createConnection(dbConfig);
 
@@ -209,3 +209,33 @@ app.put('/update_user', async (req, res) => {
         res.status(500).send("Erro ao efetuar update!");
     }
 });
+
+app.delete('/delete_user', async (req, res) => {
+    try {
+        const email = req.session.email;
+        const connection = await mysql.createConnection(dbConfig);
+
+        const pkUserSQL = await connection.execute('SELECT pkUser FROM Usuarios WHERE email = ?', [email]);
+        const pkUser = pkUserSQL[0][0].pkUser;
+
+
+        sql = await connection.execute('SELECT numero From Telefone WHERE fkUser = ?', [pkUser]);
+        if (sql.length > 0) {
+            sql = await connection.execute('DELETE From Telefone WHERE fkUser = ?', [pkUser]);
+        }
+
+        sql = await connection.execute('SELECT numero From Endereco WHERE fkUser = ?', [pkUser]);
+        if (sql.length > 0) {
+            sql = await connection.execute('DELETE From Endereco WHERE fkUser = ?', [pkUser]);
+        }
+
+        sql = await connection.execute('DELETE From Usuarios WHERE pkUser = ?', [pkUser]);
+
+        connection.end();
+
+        res.status(200).send({ success: true });
+    } catch (error) {
+        console.error("Erro detalhado:", error);  // Log do erro detalhado
+        res.status(500).send("Erro ao excluir usuário!");
+    }
+})

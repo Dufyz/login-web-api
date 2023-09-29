@@ -38,7 +38,7 @@ CREATE TRIGGER Endereco_log_i
 AFTER INSERT ON Endereco
 FOR EACH ROW
 BEGIN
-    INSERT INTO db_users_logs.Endereco VALUES(NULL, NEW.pkEndereco, NEW.estado, NEW.cidade, NEW.numero, NEW.cep, NEW.fkUser, NEW.created_at, 'I', NOW());
+    INSERT INTO db_users_logs.Endereco VALUES(NULL, NEW.pkEndereco, NEW.estado, NEW.cidade, NEW.numero, NEW.cep, NEW.fkUser, 'I', NOW());
 END
 $
 
