@@ -1,70 +1,73 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+
     <!-- <link rel="stylesheet" type="text/css" href="assets/css/style.css" /> -->
     <link rel="stylesheet" type="text/css" href="public/assets/css/style.css" />
+
 </head>
 
 <body>
-    <section>
-        <div class="form-container">
-            <div class="data-container-input">
-                <h1>Perfil</h1>
+    <div class="profile-wrapper">
+        <div class="button-box">
+            <h1>Perfil</h1>
+            <button type="submit" id="excluir">Deletar</button>
+        </div>
+        <div class="input-box">
+            <input type="text" placeholder="Nome" id="user_name" readonly>
+            <!-- <i class='bx bxs-user'></i> -->
+        </div>
+        <div class="input-box">
+            <input type="email" placeholder="Email" id="email" readonly>
+            <!-- <i class='bx bxs-user'></i> -->
+        </div>
+        <div class="input-box">
+            <input type="tel" placeholder="Telefone" id="telefone" readonly>
+            <!-- <i class='bx bxs-user'></i> -->
+        </div>
+        <div class="input-box">
+            <input type="password" placeholder="Senha" id="password" value="**********" readonly>
+            <!-- <i class='bx bxs-user'></i> -->
+        </div>
+
+        <h2>Endereco</h2>
+        <div class="input-box mr">
+            <input type="text" placeholder="Rua" readonly id="rua">
+            <!-- <i class='bx bxs-user'></i> -->
+        </div>
+        <div class="profile-row">
+            <div class="input-box mr">
+                <input type="text" placeholder="Estado" readonly id="estado">
+                <!-- <i class='bx bxs-user'></i> -->
             </div>
-            <div class="data-container">
-                <div class="data-container-personal-info">
-                    <div class="data-container-input">
-                        <label for="">Usuario</label>
-                        <input type="text" id="user_name" value="#" readonly>
-                    </div>
-                    <div class="data-container-input">
-                        <label for="">Email</label>
-                        <input type="email" id="email" value="#" readonly>
-                    </div>
-                    <div class="data-container-input">
-                        <label for="">Telefone</label>
-                        <input type="tel" id="telefone" value="#" readonly>
-                    </div>
-                    <div class="data-container-input">
-                        <label for="">Senha</label>
-                        <input type="password" id="password" value="*********" readonly>
-                    </div>
-                </div>
-                <div class="data-container-endereco">
-                    <div class="data-container-input">
-                        <label for="">Estado</label>
-                        <input type="text" id="estado" value="#" readonly>
-                    </div>
-                    <div class="data-container-input">
-                        <label for="">Cidade</label>
-                        <input type="text" id="cidade" value="#" readonly>
-                    </div>
-                    <div class="data-container-input">
-                        <label for="">CEP</label>
-                        <input type="text" id="cep" value="#" readonly>
-                    </div>
-                    <div class="data-container-input">
-                        <label for="">Numero</label>
-                        <input type="text" id="numero" value="#" readonly>
-                    </div>
-                </div>
-            </div>
-            <div class="data-container-button-column">
-                <div class="data-container-button-row">
-                    <button type="submit" id="editar">Editar</button>
-                    <button type="submit" id="excluir">Excluir Usuário</button>
-                </div>
-                <button type="submit" id="logout">Sair</button>
+            <div class="input-box">
+                <input type="text" placeholder="Cidade" readonly id="cidade">
+                <!-- <i class='bx bxs-user'></i> -->
             </div>
         </div>
-    </section>
+        <div class="profile-row">
+            <div class="input-box mr">
+                <input type="text" placeholder="CEP" readonly id="cep">
+                <!-- <i class='bx bxs-user'></i> -->
+            </div>
+            <div class="input-box">
+                <input type="number" placeholder="Numero" readonly id="numero">
+                <!-- <i class='bx bxs-user'></i> -->
+            </div>
+        </div>
 
-    <!-- <script src="assets/js/profile.js"></script> -->
-    <script src="public/assets/js/profile.js"></script>
+        <div class="button-box">
+            <button type="submit" id="editar">Editar</button>
+            <button type="submit" id="logout">Sair</button>
+        </div>
+
+        <!-- <script src="assets/js/profile.js"></script> -->
+        <script src="public/assets/js/profile.js"></script>
+
 </body>
 
 </html>

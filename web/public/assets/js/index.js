@@ -7,11 +7,11 @@ function toggleSections() {
 
     showRegisterLink.addEventListener('click', () => {
         loginForm.style.display = 'none';
-        registerForm.style.display = 'flex';
+        registerForm.style.display = 'block';
     });
 
     showLoginLink.addEventListener('click', () => {
-        loginForm.style.display = 'flex';
+        loginForm.style.display = 'block';
         registerForm.style.display = 'none';
     });
 }
@@ -26,7 +26,7 @@ function submitForm(event) {
     const data = {
         login: formData.get('user'),
         email: formData.get('email'),
-        password: formData.get('senha')
+        password: formData.get('password')
     };
     fetch('/create_user', {
         method: 'POST',

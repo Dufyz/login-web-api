@@ -68,14 +68,14 @@ app.get('/user_data', checkAuthentication, async (req, res) => {
         const pkUser = pkUserSQL[0][0].pkUser;
 
         user = {
-            user_name: "#",
-            email: "#",
-            telefone: "#",
+            user_name: "",
+            email: "",
+            telefone: "",
             // pwdHash: "*********",
-            estado: "#",
-            cidade: "#",
-            cep: "#",
-            numero: "#"
+            estado: "",
+            cidade: "",
+            cep: "",
+            numero: ""
         }
 
         sql = await connection.execute('SELECT user_name, email FROM Usuarios WHERE pkUser = ?', [pkUser]);

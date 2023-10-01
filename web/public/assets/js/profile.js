@@ -7,7 +7,6 @@ async function fetchUserData() {
     }
     const data = await response.json();
     // Atualizando os elementos de entrada com os dados recebidos
-    console.log(data[0]);
     document.getElementById('user_name').value = data.user_name;
     document.getElementById('email').value = data.email;
     document.getElementById('telefone').value = data.telefone;

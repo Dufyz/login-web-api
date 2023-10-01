@@ -1,113 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&family=Oswald&family=Poppins&display=swap');
+
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0px;
-    background-color: #333;
-    color: #fff;
+    background-color: #303e7c;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #fff;
 }
 
 a {
     text-decoration: none;
-    color: #0077cc;
+    color: #fff;
 }
 
-.form-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    width: 100%;
-    height: 100vh;
-    margin-bottom: 50px;
-}
 
-h2, h1 {
-    margin-bottom: 30px;
-}
 
-input {
-    width: 400px;
-    height: 45px;
-    margin-top: 10px;
-    color: black;
-    font-size: 1.2rem;
-}
-
-.form-container p {
-    margin-top: 25px;
-}
-
-.input-container {
-    margin-bottom: 10px;
-}
-
-.form-container:nth-child(2) {
+form:nth-child(2) {
     display: none;
 }
 
-.data-container {
+.index-wrapper {
+    padding: 30px;
+    background-color: #4f5b9c;
+    width: 420px;
+    border-radius: 40px;
+}
+
+.index-wrapper h1 {
+    text-align: center;
+    font-size: 4rem;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input {
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    border: 2px solid rgba(171, 178, 250, 0.378);
+    color: #000;
+    padding: 20px;
+}
+
+.index-wrapper .input-box input::placeholder {
+    color: rgba(0, 0, 0, 0.453);
+}
+
+.index-wrapper .input-box i {
+    color: black;
+    position: absolute;
+    right: 20px;
+    top: 35%;
+    transform: rotateY(-50%);
+}
+
+.index-wrapper .forget-remember {
+    font-size: 1rem;
     display: flex;
     flex-direction: row;
-    align-items: center;
-}
-
-.data-container-personal-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 400px;
-
-}
-
-.data-container-endereco {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 400px;
-    margin-left: 50px;
-}
-
-
-.data-container-input {
-    display: flex;
-    flex-direction: column;
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-}
-
-.data-container-button-column{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 
-.data-container-button-row {
+button {
+    width: 150px;
+    height: 40px;
+    font-size: 1.2rem;
+    border-radius: 40px;
+    color: #fff;
+    background-color: #abb1fa;
+    border: none;
+}
+
+.index-wrapper .login-register {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-wrapper {
+    padding: 30px;
+    background-color: #4f5b9c;
+    width: 700px;
+    border-radius: 40px;
+}
+
+.profile-row {
+    display: flex;
+}
+
+.profile-row .mr {
+    margin-right: 40px;
+}
+
+.profile-row .input-box input {
     width: 100%;
+}
+
+.button-box {
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 
 #excluir {
     visibility: hidden;
-    background-color: red;
-}
-
-
-button {
-    width: 100px;
-    height: 40px;
-    font-size: 17px;
-    border: none;
-    background-color: #0077cc;
+    background-color: #D80032;
     color: #fff;
-    margin-top: 30px;
+    border-radius: 0px;
 }

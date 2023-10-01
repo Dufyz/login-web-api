@@ -4,51 +4,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Login</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <!-- <link rel="stylesheet" type="text/css" href="assets/css/style.css" /> -->
     <link rel="stylesheet" type="text/css" href="public/assets/css/style.css" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Oswald&display=swap" rel="stylesheet">
-
-
 </head>
 
 <body>
-    <section class="">
-        <form action="/authenticate_user" method="POST" id="login-form" class="form-container">
+    <div class="index-wrapper">
+        <form action="/authenticate_user" method="POST" id="login-form">
             <h1>Login</h1>
-            <div class="input-container">
-                <label for="">Email</label></br>
-                <input type="text" type="email" id="email" name="email" required>
+            <div class="input-box">
+                <input type="email" placeholder="Email" required id="email" name="email">
+                <i class='bx bxs-user'></i>
             </div>
-            <div class="input-container">
-                <label for="">Senha</label></br>
-                <input type="password" id="password" name="password" required>
+            <div class="input-box">
+                <input type="password" placeholder="Senha" required id="password" name="password">
+                <i class='bx bxs-lock'></i>
+            </div>
+            <div class="forget-remember">
+                <div>
+                    <input type="checkbox" name="" id="">
+                    <label for="">Relembre-me</label>
+                </div>
+                <b><a href="">Esqueceu a senha?</a></b>
             </div>
             <button type="submit">Login</button>
-            <p>Não possui conta? <a href="#" id="show-register-link">Registrar</a></p>
+            <div class="login-register">
+                <p>Não possui conta? <b><a href="#" id="show-register-link">Registrar</a></b></p>
+            </div>
         </form>
 
-        <form id="register-form" class="form-container" onsubmit="submitForm(event)">
+        <form id="register-form" onsubmit="submitForm(event)">
             <h1>Registrar</h1>
-            <div class="input-container">
-                <label for="">Usuário</label></br>
-                <input type="text" name="user">
+            <div class="input-box">
+                <input type="text" placeholder="Nome" required name="user">
+                <i class='bx bxs-user'></i>
             </div>
-            <div class="input-container">
-                <label for="">Email</label></br>
-                <input type="email" name="email">
+            <div class="input-box">
+                <input type="email" placeholder="Email" required name="email">
+                <i class='bx bxs-user'></i>
             </div>
-            <div class="input-container">
-                <label for="">Senha</label></br>
-                <input type="password" name="senha">
+            <div class="input-box">
+                <input type="password" placeholder="Senha" required name="password">
+                <i class='bx bxs-lock'></i>
             </div>
-            <button type="submit">Enviar</button>
-            <p>Já possui uma conta? <a href="#" id="show-login-link">Login</a></p>
+            <div class="input-box">
+                <input type="password" placeholder="Repetir senha" required name="password">
+                <i class='bx bxs-lock'></i>
+            </div>
+            <!-- <div class="input-box">
+                <input type="password" placeholder="Senha" required>
+                <i class='bx bxs-lock'></i>
+            </div> -->
+            <button type="submit">Registrar</button>
+            <div class="login-register">
+                <p>Já possui conta? <b><a href="#" id="show-login-link">Login</a></b></p>
+            </div>
         </form>
-    </section>
+    </div>
 
     <!-- <script src="assets/js/index.js"></script> -->
     <script src="public/assets/js/index.js"></script>
