@@ -26,21 +26,21 @@
             </div>
             <div class="forget-remember">
                 <div>
-                    <input type="checkbox" name="" id="">
+                    <input type="checkbox">
                     <label for="">Relembre-me</label>
                 </div>
-                <b><a href="">Esqueceu a senha?</a></b>
+                <b><a href="#" id="show-password-link">Esqueceu a senha?</a></b>
             </div>
-            <button type="submit">Login</button>
+            <button type="submit" id="login">Login</button>
             <div class="login-register">
                 <p>Não possui conta? <b><a href="#" id="show-register-link">Registrar</a></b></p>
             </div>
         </form>
 
-        <form id="register-form" onsubmit="submitForm(event)">
+        <form action="/create_user" method="POST" id="register-form">
             <h1>Registrar</h1>
             <div class="input-box">
-                <input type="text" placeholder="Nome" required name="user">
+                <input type="text" placeholder="Nome" required name="user_name">
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
@@ -55,13 +55,29 @@
                 <input type="password" placeholder="Repetir senha" required name="password">
                 <i class='bx bxs-lock'></i>
             </div>
-            <!-- <div class="input-box">
-                <input type="password" placeholder="Senha" required>
-                <i class='bx bxs-lock'></i>
-            </div> -->
-            <button type="submit">Registrar</button>
+            <button type="submit" id="registrar">Registrar</button>
             <div class="login-register">
                 <p>Já possui conta? <b><a href="#" id="show-login-link">Login</a></b></p>
+            </div>
+        </form>
+
+        <form action="/recover_password" method="POST" id="password-form">
+            <h1>Senha</h1>
+            <div class="input-box">
+                <input type="email" placeholder="Email" required name="email">
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Senha" required id="password">
+                <i class='bx bxs-lock'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Repetir senha" required id="re-password">
+                <i class='bx bxs-lock'></i>
+            </div>
+            <button type="submit">Enviar</button>
+            <div class="login-register">
+                <p>Já possui conta? <b><a href="#" id="show-login-link-2">Login</a></b></p>
             </div>
         </form>
     </div>

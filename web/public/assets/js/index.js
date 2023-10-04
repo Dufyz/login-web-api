@@ -1,47 +1,48 @@
 function toggleSections() {
     const loginForm = document.getElementById('login-form');
     const registerForm = document.getElementById('register-form');
+    const passwordForm = document.getElementById('password-form');
 
     const showRegisterLink = document.getElementById('show-register-link');
     const showLoginLink = document.getElementById('show-login-link');
+    const showLoginLink2 = document.getElementById('show-login-link-2');
+    const showPasswordLink = document.getElementById('show-password-link');
 
     showRegisterLink.addEventListener('click', () => {
         loginForm.style.display = 'none';
         registerForm.style.display = 'block';
+        passwordForm.style.display = 'none';
     });
 
     showLoginLink.addEventListener('click', () => {
         loginForm.style.display = 'block';
         registerForm.style.display = 'none';
+        passwordForm.style.display = 'none';
+    });
+
+    showPasswordLink.addEventListener('click', () => {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'none';
+        passwordForm.style.display = 'block';
+    });
+
+    showLoginLink2.addEventListener('click', () => {
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
+        passwordForm.style.display = 'none';
     });
 }
 
-// Chame a função para habilitar o comportamento de alternância das seções
 toggleSections();
 
-// Função para lidar com o envio do formulário
-function submitForm(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = {
-        login: formData.get('user'),
-        email: formData.get('email'),
-        password: formData.get('password')
-    };
-    fetch('/create_user', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => response.json())
-        .then(result => {
-            if (result.message) {
-                alert(result.message);
-            };
-            if (result.success) {
-                window.location.href = '/';
-            }
-        });
-};
+function validateForm() {
+    var password = document.getElementById("recover-password").value;
+    var rePassword = document.getElementById("recover-password-2").value;
+
+    if (password !== rePassword) {
+        alert("As senhas não coincidem. Por favor, tente novamente.");
+        return false;
+    }
+
+    return true;
+}

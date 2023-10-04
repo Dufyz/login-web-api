@@ -38,7 +38,7 @@ CREATE TRIGGER Endereco_log_i
 AFTER INSERT ON Endereco
 FOR EACH ROW
 BEGIN
-    INSERT INTO db_users_logs.Endereco VALUES(NULL, NEW.pkEndereco, NEW.estado, NEW.cidade, NEW.numero, NEW.cep, NEW.fkUser, 'I', NOW());
+    INSERT INTO db_users_logs.Endereco VALUES(NULL, NEW.pkEndereco, NEW.rua, NEW.estado, NEW.cidade, NEW.numero, NEW.cep, NEW.fkUser, 'I', NOW());
 END
 $
 
@@ -46,7 +46,7 @@ CREATE TRIGGER Endereco_log_u
 AFTER UPDATE ON Endereco
 FOR EACH ROW
 BEGIN
-    INSERT INTO db_users_logs.Endereco VALUES(NULL, NEW.pkEndereco, NEW.estado, NEW.cidade, NEW.numero, NEW.cep, NEW.fkUser, 'U', NOW());
+    INSERT INTO db_users_logs.Endereco VALUES(NULL, NEW.pkEndereco, NEW.rua, NEW.estado, NEW.cidade, NEW.numero, NEW.cep, NEW.fkUser, 'U', NOW());
 END
 $
 
@@ -54,7 +54,7 @@ CREATE TRIGGER Endereco_log_d
 BEFORE DELETE ON Endereco
 FOR EACH ROW 
 BEGIN   
-    INSERT INTO db_users_logs.Endereco VALUES(NULL, OLD.pkEndereco, OLD.estado, OLD.cidade, OLD.numero, OLD.cep, OLD.fkUser, 'D', NOW());
+    INSERT INTO db_users_logs.Endereco VALUES(NULL, OLD.pkEndereco, OLD.rua, OLD.estado, OLD.cidade, OLD.numero, OLD.cep, OLD.fkUser, 'D', NOW());
 END
 $
 

@@ -1,0 +1,1 @@
+INSERT INTO Usuarios VALUES ();

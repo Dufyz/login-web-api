@@ -23,7 +23,7 @@ a {
 
 
 
-form:nth-child(2) {
+form:nth-child(2), form:nth-child(3) {
     display: none;
 }
 

@@ -16,6 +16,7 @@ CREATE TABLE Usuarios(
 CREATE TABLE Endereco(
     pkEndereco_log INT PRIMARY KEY AUTO_INCREMENT,
     pkEndereco INT NOT NULL,
+    rua VARCHAR(255) NOT NULL,
     estado VARCHAR(2) NOT NULL,
     cidade VARCHAR(255) NOT NULL,
     numero INT NOT NULL,

@@ -9,6 +9,15 @@ const crypto = require('crypto');
 const app = express();
 const port = 3000;
 
+//Funções
+function checkAuthentication(req, res, next) {
+    if (req.session.isAuthenticated) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+}
+
 // Configuração do banco de dados
 const dbConfig = {
     host: 'localhost',
@@ -17,15 +26,8 @@ const dbConfig = {
     database: 'db_users'
 };
 
+//Segredo do encript
 const secret = crypto.randomBytes(32).toString('hex');
-
-function checkAuthentication(req, res, next) {
-    if (req.session.isAuthenticated) {
-        next();
-    } else {
-        res.redirect('/');
-    }
-}
 
 // Middleware para analisar corpos de solicitação JSON
 app.use(bodyParser.json());
@@ -35,35 +37,27 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
-
 app.use(express.static(__dirname + '/web'));
 
+//Criando porta do servidor
 app.listen(port, () => {
     console.log(`Server started on http://localhost:${port}`);
 });
 
+//Requisições GET
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'web/public/index.html'));
 });
 
-app.get('/users', async (req, res) => {
-    try {
-        const connection = await mysql.createConnection(dbConfig);
-        const [users] = await connection.execute('SELECT pkUser, user_name, email, created_at FROM Usuarios');
-        connection.end();
-
-        res.status(200).send(users);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({ message: 'Internal server error' });
-    }
+app.get('/profile', checkAuthentication, (req, res) => {
+    res.sendFile(path.join(__dirname, 'web/public/profile.html'));
 });
 
 app.get('/user_data', checkAuthentication, async (req, res) => {
     try {
         const email = req.session.email;
-
         const connection = await mysql.createConnection(dbConfig);
+
         const pkUserSQL = await connection.execute('SELECT pkUser FROM Usuarios WHERE email = ?', [email]);
         const pkUser = pkUserSQL[0][0].pkUser;
 
@@ -71,7 +65,7 @@ app.get('/user_data', checkAuthentication, async (req, res) => {
             user_name: "",
             email: "",
             telefone: "",
-            // pwdHash: "*********",
+            rua: "",
             estado: "",
             cidade: "",
             cep: "",
@@ -83,15 +77,14 @@ app.get('/user_data', checkAuthentication, async (req, res) => {
         user.email = sql[0][0].email;
 
         sql = await connection.execute('SELECT numero FROM Telefone WHERE fkUser = ?', [pkUser]);
-
         if (sql[0][0]?.numero) {
             user.telefone = sql[0][0].numero;
         }
 
 
-        sql = await connection.execute('SELECT estado, cidade, cep, numero FROM Endereco WHERE fkUser = ?', [pkUser]);
-
+        sql = await connection.execute('SELECT rua, estado, cidade, cep, numero FROM Endereco WHERE fkUser = ?', [pkUser]);
         if (sql[0][0]?.numero) {
+            user.rua = sql[0][0].rua;
             user.estado = sql[0][0].estado;
             user.cidade = sql[0][0].cidade;
             user.cep = sql[0][0].cep;
@@ -106,25 +99,21 @@ app.get('/user_data', checkAuthentication, async (req, res) => {
     };
 })
 
-app.get('/profile', checkAuthentication, (req, res) => {
-    res.sendFile(path.join(__dirname, 'web/public/profile.html'));
-});
-
+//Requisições POST
 app.post('/create_user', async (req, res) => {
     try {
-        const { login, email, password } = req.body;
+        const { user_name, email, password } = req.body;
 
         const hashedPassword = bcrypt.hashSync(password, 8);
 
         const connection = await mysql.createConnection(dbConfig);
         await connection.execute(
             'INSERT INTO Usuarios (user_name, email, pwdHash) VALUES (?, ?, ?)',
-            [login, email, hashedPassword]
+            [user_name, email, hashedPassword]
         );
 
         connection.end();
-
-        res.status(201).send({ message: 'New user created!', success: true});
+        res.redirect("/");
     } catch (error) {
         console.error(error);
         res.status(500).send({ message: 'Internal server error', success: false });
@@ -134,7 +123,6 @@ app.post('/create_user', async (req, res) => {
 app.post('/authenticate_user', async (req, res) => {
     try {
         const { email, password } = req.body;
-
         const connection = await mysql.createConnection(dbConfig);
 
         // Consulta o banco de dados para obter a senha hash para o email fornecido
@@ -159,7 +147,7 @@ app.post('/authenticate_user', async (req, res) => {
 
         connection.end();
     } catch (error) {
-        console.error("Erro detalhado:", error);  // Log do erro detalhado
+        console.error("Erro detalhado:", error);  
         res.status(500).send("Erro ao autenticar o usuário!");
     }
 });
@@ -169,14 +157,35 @@ app.post('/logout', async (req, res) => {
         req.session.isAuthenticated = false;
         res.redirect('/');
     } catch (error) {
-        console.error("Erro detalhado:", error);  // Log do erro detalhado
+        console.error("Erro detalhado:", error);  
         res.status(500).send("Erro ao efetuar logout!");
     }
 });
 
+app.post('/recover_password', async (req, res) => {
+    try {
+        const {email, password, repassword} = req.body;
+        const connection = await mysql.createConnection(dbConfig);
+
+        const pkUserSQL = await connection.execute('SELECT pkUser FROM Usuarios WHERE email = ?', [email]);
+        const pkUser = pkUserSQL[0][0].pkUser;
+
+        const hashedPassword = bcrypt.hashSync(password, 8);
+        const sql = await connection.execute("UPDATE Usuarios SET pwdHash = ? WHERE pkUser = ?", [hashedPassword, pkUser]);
+
+        connection.end();
+        
+        res.redirect("/")
+    } catch(erro) {
+        console.error("Erro detalhado:", error);  
+        res.status(500).send("Erro ao resetar senha!");
+    }
+});
+
+//Requisições UPDATE
 app.put('/update_user', async (req, res) => {
     try {
-        const { telefone, estado, cidade, cep, numero    } = req.body;
+        const { telefone, rua, estado, cidade, cep, numero } = req.body;
         const email = req.session.email;
         const connection = await mysql.createConnection(dbConfig);
 
@@ -197,19 +206,21 @@ app.put('/update_user', async (req, res) => {
         const [rows_endereco] = await connection.execute('SELECT estado FROM Endereco WHERE fkUser = ?', [pkUser]);
 
         if (rows_endereco.length > 0) {
-            sql = await connection.execute('UPDATE Endereco SET estado = ?, cidade = ?, cep = ?, numero = ? WHERE fkUser = ?', [estado, cidade, numero, cep, pkUser]);
+            sql = await connection.execute('UPDATE Endereco SET rua = ?, estado = ?, cidade = ?, cep = ?, numero = ? WHERE fkUser = ?', [rua, estado, cidade, numero, cep, pkUser]);
         } else {
-            sql = await connection.execute('INSERT INTO Endereco VALUES(NULL, ?, ?, ?, ?, ?)', [estado, cidade, numero, cep, pkUser]);
+            sql = await connection.execute('INSERT INTO Endereco VALUES(NULL, ?, ?, ?, ?, ?, ?)', [rua, estado, cidade, numero, cep, pkUser]);
         }
 
         connection.end();
         res.status(201).send({ message: 'Updated!' });
     } catch (error) {
-        console.error("Erro detalhado:", error);  // Log do erro detalhado
+        console.error("Erro detalhado:", error);  
         res.status(500).send("Erro ao efetuar update!");
     }
 });
 
+
+//Requisições DELETE
 app.delete('/delete_user', async (req, res) => {
     try {
         const email = req.session.email;
@@ -232,10 +243,9 @@ app.delete('/delete_user', async (req, res) => {
         sql = await connection.execute('DELETE From Usuarios WHERE pkUser = ?', [pkUser]);
 
         connection.end();
-
         res.status(200).send({ success: true });
     } catch (error) {
-        console.error("Erro detalhado:", error);  // Log do erro detalhado
+        console.error("Erro detalhado:", error);  
         res.status(500).send("Erro ao excluir usuário!");
     }
 })

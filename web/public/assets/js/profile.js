@@ -9,6 +9,7 @@ async function fetchUserData() {
     // Atualizando os elementos de entrada com os dados recebidos
     document.getElementById('user_name').value = data.user_name;
     document.getElementById('email').value = data.email;
+    document.getElementById('rua').value = data.rua;
     document.getElementById('telefone').value = data.telefone;
     // document.getElementById('password').value = data.pwdHash;
     document.getElementById('estado').value = data.estado;
@@ -60,6 +61,7 @@ document.getElementById('editar').addEventListener('click', function (event) {
   if (this.innerText == "Editar") {
     this.innerText = 'Salvar';
     document.getElementById('telefone').removeAttribute('readonly');
+    document.getElementById('rua').removeAttribute('readonly');
     document.getElementById('estado').removeAttribute('readonly');
     document.getElementById('cidade').removeAttribute('readonly');
     document.getElementById('cep').removeAttribute('readonly');
@@ -71,6 +73,7 @@ document.getElementById('editar').addEventListener('click', function (event) {
   } else {
     this.innerText = 'Editar';
     document.getElementById('telefone').setAttribute('readonly', 'readonly');
+    document.getElementById('rua').setAttribute('readonly', 'readonly');
     document.getElementById('estado').setAttribute('readonly', 'readonly');
     document.getElementById('cidade').setAttribute('readonly', 'readonly');
     document.getElementById('cep').setAttribute('readonly', 'readonly');
@@ -81,6 +84,7 @@ document.getElementById('editar').addEventListener('click', function (event) {
 
     user = {
       telefone: document.getElementById('telefone').value,
+      rua: document.getElementById('rua').value,
       estado: document.getElementById('estado').value,
       cidade: document.getElementById('cidade').value,
       cep: document.getElementById('cep').value,
