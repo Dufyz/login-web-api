@@ -34,15 +34,3 @@ function toggleSections() {
 }
 
 toggleSections();
-
-function validateForm() {
-    var password = document.getElementById("recover-password").value;
-    var rePassword = document.getElementById("recover-password-2").value;
-
-    if (password !== rePassword) {
-        alert("As senhas não coincidem. Por favor, tente novamente.");
-        return false;
-    }
-
-    return true;
-}

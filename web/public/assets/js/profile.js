@@ -7,15 +7,14 @@ async function fetchUserData() {
     }
     const data = await response.json();
     // Atualizando os elementos de entrada com os dados recebidos
-    document.getElementById('user_name').value = data.user_name;
-    document.getElementById('email').value = data.email;
-    document.getElementById('rua').value = data.rua;
-    document.getElementById('telefone').value = data.telefone;
-    // document.getElementById('password').value = data.pwdHash;
-    document.getElementById('estado').value = data.estado;
-    document.getElementById('cidade').value = data.cidade;
-    document.getElementById('cep').value = data.cep;
-    document.getElementById('numero').value = data.numero;
+    document.getElementById('update_user_name').value = data.user_name;
+    document.getElementById('update_email').value = data.email;
+    document.getElementById('update_rua').value = data.rua;
+    document.getElementById('update_telefone').value = data.telefone;
+    document.getElementById('update_estado').value = data.estado;
+    document.getElementById('update_cidade').value = data.cidade;
+    document.getElementById('update_cep').value = data.cep;
+    document.getElementById('update_numero').value = data.numero;
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error);
   }
@@ -60,35 +59,35 @@ function updateUser(user) {
 document.getElementById('editar').addEventListener('click', function (event) {
   if (this.innerText == "Editar") {
     this.innerText = 'Salvar';
-    document.getElementById('telefone').removeAttribute('readonly');
-    document.getElementById('rua').removeAttribute('readonly');
-    document.getElementById('estado').removeAttribute('readonly');
-    document.getElementById('cidade').removeAttribute('readonly');
-    document.getElementById('cep').removeAttribute('readonly');
-    document.getElementById('numero').removeAttribute('readonly');
+    document.getElementById('update_telefone').removeAttribute('readonly');
+    document.getElementById('update_rua').removeAttribute('readonly');
+    document.getElementById('update_estado').removeAttribute('readonly');
+    document.getElementById('update_cidade').removeAttribute('readonly');
+    document.getElementById('update_cep').removeAttribute('readonly');
+    document.getElementById('update_numero').removeAttribute('readonly');
 
     document.getElementById('excluir').style.visibility = "visible";
     document.getElementById('logout').style.visibility = "hidden";
 
   } else {
     this.innerText = 'Editar';
-    document.getElementById('telefone').setAttribute('readonly', 'readonly');
-    document.getElementById('rua').setAttribute('readonly', 'readonly');
-    document.getElementById('estado').setAttribute('readonly', 'readonly');
-    document.getElementById('cidade').setAttribute('readonly', 'readonly');
-    document.getElementById('cep').setAttribute('readonly', 'readonly');
-    document.getElementById('numero').setAttribute('readonly', 'readonly');
+    document.getElementById('update_telefone').setAttribute('readonly', 'readonly');
+    document.getElementById('update_rua').setAttribute('readonly', 'readonly');
+    document.getElementById('update_estado').setAttribute('readonly', 'readonly');
+    document.getElementById('update_cidade').setAttribute('readonly', 'readonly');
+    document.getElementById('update_cep').setAttribute('readonly', 'readonly');
+    document.getElementById('update_numero').setAttribute('readonly', 'readonly');
 
     document.getElementById('excluir').style.visibility = "hidden";
     document.getElementById('logout').style.visibility = "visible";
 
     user = {
-      telefone: document.getElementById('telefone').value,
-      rua: document.getElementById('rua').value,
-      estado: document.getElementById('estado').value,
-      cidade: document.getElementById('cidade').value,
-      cep: document.getElementById('cep').value,
-      numero: document.getElementById('numero').value
+      update_telefone: document.getElementById('update_telefone').value,
+      update_rua: document.getElementById('update_rua').value,
+      update_estado: document.getElementById('update_estado').value,
+      update_cidade: document.getElementById('update_cidade').value,
+      update_cep: document.getElementById('update_cep').value,
+      update_numero: document.getElementById('update_numero').value
     }
 
     updateUser(user);

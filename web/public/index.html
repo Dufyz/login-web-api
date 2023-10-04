@@ -17,11 +17,11 @@
         <form action="/authenticate_user" method="POST" id="login-form">
             <h1>Login</h1>
             <div class="input-box">
-                <input type="email" placeholder="Email" required id="email" name="email">
+                <input type="email" placeholder="Email" required id="login_email" name="login_email">
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="Senha" required id="password" name="password">
+                <input type="password" placeholder="Senha" required id="login_password" name="login_password">
                 <i class='bx bxs-lock'></i>
             </div>
             <div class="forget-remember">
@@ -40,19 +40,15 @@
         <form action="/create_user" method="POST" id="register-form">
             <h1>Registrar</h1>
             <div class="input-box">
-                <input type="text" placeholder="Nome" required name="user_name">
+                <input type="text" placeholder="Nome" required name="create_user_name">
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
-                <input type="email" placeholder="Email" required name="email">
+                <input type="email" placeholder="Email" required name="create_email">
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="Senha" required name="password">
-                <i class='bx bxs-lock'></i>
-            </div>
-            <div class="input-box">
-                <input type="password" placeholder="Repetir senha" required name="password">
+                <input type="password" placeholder="Senha" required name="create_password">
                 <i class='bx bxs-lock'></i>
             </div>
             <button type="submit" id="registrar">Registrar</button>
@@ -64,15 +60,11 @@
         <form action="/recover_password" method="POST" id="password-form">
             <h1>Senha</h1>
             <div class="input-box">
-                <input type="email" placeholder="Email" required name="email">
+                <input type="email" placeholder="Email" required name="recover_email">
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="Senha" required id="password">
-                <i class='bx bxs-lock'></i>
-            </div>
-            <div class="input-box">
-                <input type="password" placeholder="Repetir senha" required id="re-password">
+                <input type="password" placeholder="Senha" required name="recover_password">
                 <i class='bx bxs-lock'></i>
             </div>
             <button type="submit">Enviar</button>
